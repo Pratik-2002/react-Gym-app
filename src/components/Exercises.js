@@ -1,5 +1,4 @@
 import React,{ useEffect, useState } from 'react'
-// import { Pagination } from '@mui/material/Pagination';
 import Pagination from '@mui/material/Pagination';
 import { Box, Stack , Typography } from '@mui/material';
 import { exerciseOptions, fetchData } from '../utils/fetchData';
@@ -8,34 +7,34 @@ import ExerciseCard from './ExerciseCard';
 const Exercises = ({ exercises , setExercises, bodyPart }) => {
 
   const [currentPage , setCurrentPage] = useState(1);
-  const exercisesPerPage=9;
-  const indexofLastExercise = currentPage * exercisesPerPage;
-  const indexofFirstExercise = indexofLastExercise - exercisesPerPage;
-  const currentExercises = exercises.slice(indexofFirstExercise,indexofLastExercise)
-
-  const paginate = (e , value) =>{
-    setCurrentPage(value);
-
-    window.scrollTo({top:1800 ,behavior:'smooth'})
-  }
+  const [exercisesPerPage] = useState(6);
 
   useEffect(() => {
     const fetchExercisesData = async () => {
 
-        let exercisesData= [];
-        if(bodyPart === 'all'){
+        let exercisesData = [];
+        if (bodyPart === 'all'){
           exercisesData = await fetchData('https://exercisedb.p.rapidapi.com/exercises',  exerciseOptions); 
     
         }
         else{
-          exercisesData = await fetchData(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`,  exerciseOptions)
+          exercisesData = await fetchData(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`,  exerciseOptions);
         }
         setExercises(exercisesData);
-    }
+    };
     fetchExercisesData();
   }, [bodyPart]);
+  const indexofLastExercise = currentPage * exercisesPerPage;
+  const indexofFirstExercise = indexofLastExercise - exercisesPerPage;
+  const currentExercises = exercises.slice(indexofFirstExercise, indexofLastExercise);
 
-  // console.log(exercises);
+  const paginate = (e , value) =>{
+    setCurrentPage(value);
+
+    window.scrollTo({top:1800 , behavior:'smooth'})
+  }
+
+
   return (
     <Box id="exercises"
       sx ={{mt: { lg: '110px' }}}

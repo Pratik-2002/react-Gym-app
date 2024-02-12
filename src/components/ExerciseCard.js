@@ -20,9 +20,8 @@ const ExerciseCard = ({ exercise }) => {
         {exercise.target}
         </Button>
       </Stack>
-      <Typography ml="28px" color="black" fontWeight={"bold"} mt={"10px"}
-      pb={"10px"} textTransform={"capitalize"} fontSize={"22px"}>
-        {exercise.name }
+      <Typography ml="21px" color="#000" fontWeight="bold" sx={{ fontSize: { lg: '24px', xs: '20px' } }} mt="11px" pb="10px" textTransform="capitalize">
+        {exercise.name}
       </Typography>
 
 
